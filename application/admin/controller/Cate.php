@@ -12,7 +12,18 @@ class Cate extends \think\Controller
 		$cate_select = db('cate')->select();
 		$cate_model = model('cate');
 		$cate_list = $cate_model->getChildrenId($cate_select);
-		$this->assign('cate_list',$cate_list);
+
+		//得到数据总数
+		$cate_totle = count($cate_list);
+
+		$page_class = new \app\admin\controller\Page($cate_totle,6);
+		$show = $page_class->fpage();        //模板显示的内容
+		$limit = $page_class->setlimit();    //获取limit信息  ‘3,2’
+		$limit = explode(',',$limit);     //['3','2']
+		//dump($limit);
+		$list = array_slice($cate_list,$limit[0],$limit[1]);   //123456
+		$this->assign('show',$show);
+        $this->assign('cate_list',$list);
 		return view();
 	}
 }
