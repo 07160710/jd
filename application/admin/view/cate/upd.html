@@ -90,19 +90,20 @@
                         分类管理
                         <small>
                             <i class="icon-double-angle-right"></i>
-                            添加分类
+                            修改分类
                         </small>
                     </h1>
                 </div><!-- /.page-header -->
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <form class="form-horizontal" role="form" method="post" action="{:url('cate/addhanddle')}">
+                        <form class="form-horizontal" role="form" method="post" action="{:url('cate/updhanddle')}">
+                            <input type="hidden" name="cate_id" value="{$cate_find.cate_id}">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="cate_name"> 分类名称 </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="cate_name" placeholder="输入分类名称" name="cate_name" class="col-xs-10 col-sm-5">
+                                    <input type="text" id="cate_name" placeholder="输入分类名称" name="cate_name" class="col-xs-10 col-sm-5" value="{$cate_find.cate_name}">
                                 </div>
                             </div>
 
@@ -112,10 +113,14 @@
                                 <div class="col-sm-4">
                                     <!--添加进去数据库的是cate_pid，传的值确是cate_id-->
                                     <select class="form-control" id="cate_pid" name="cate_pid">
-                                            <option value="0">顶级分类</option>
-                                            {volist name="cate_list" id="vo"}
-                                            <option value="{$vo.cate_id}">{$vo.str}{$vo.cate_name}</option>
-                                            {/volist}
+                                        <option value="0">顶级分类</option>
+                                        {volist name="cate_list" id="vo"}
+                                        <option value="{$vo.cate_id}"
+                                        {if condition="$vo.cate_id eq $cate_find.cate_pid"}
+                                                selected="selected"
+                                        {/if}
+                                        >{$vo.str}{$vo.cate_name}</option>
+                                        {/volist}
                                     </select>
                                 </div>
                             </div>
@@ -124,14 +129,14 @@
 
                             <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" name="" value="添加分类" class="btn btn-info">
+                                    <input type="submit" name="" value="修改分类" class="btn btn-info">
                                     &nbsp; &nbsp; &nbsp;
 
                                     <input type="reset" name="" value="重置" class="btn">
 
                                     <!--<button class="btn" type="reset">-->
-                                        <!--<i class="icon-undo bigger-110"></i>-->
-                                        <!--Reset-->
+                                    <!--<i class="icon-undo bigger-110"></i>-->
+                                    <!--Reset-->
                                     <!--</button>-->
                                 </div>
                             </div>

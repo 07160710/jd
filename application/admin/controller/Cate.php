@@ -48,5 +48,35 @@ class Cate extends \think\Controller
         }
 	    //dump($post);
     }
+
+    //修改分类信息页面显示
+    public function upd($cate_id=''){
+	    if($cate_id == ''){
+	        $this->redirect('cate/catelist');
+        }
+        $cate_find = db('cate')->find($cate_id);
+	    if($cate_find == ''){
+	        $this->redirect('cate/cate/catelist');
+        }
+        $cate_select = db('cate')->select();
+        $cate_model = model('cate');
+        $cate_list = $cate_model->getChildrenId($cate_select);
+        //获取无限极分类列表
+
+        $this->assign('cate_list',$cate_list);
+        $this->assign('cate_find',$cate_find);
+	    return view();
+    }
+
+    //修改分类信息form表单处理方法
+    public function updhanddle(){
+	    $post = request()->post();
+	    $cate_upd_result = db('cate')->update($post);
+	    if($cate_upd_result !== false){
+	        $this->success('分类信息修改成功','cate/catelist');
+        }else{
+	        $this->error('分类信息修改失败','cate/catelist');
+        }
+    }
 }
 ?>
