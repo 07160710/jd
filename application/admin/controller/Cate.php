@@ -26,5 +26,27 @@ class Cate extends \think\Controller
         $this->assign('cate_list',$list);
 		return view();
 	}
+
+	//添加商品界面显示
+	public function add(){
+        $cate_select = db('cate')->select();
+        $cate_model = model('cate');
+        $cate_list = $cate_model->getChildrenId($cate_select);
+        //获取无限极分类列表
+        $this->assign('cate_list',$cate_list);
+	    return view();
+    }
+
+    //添加分类form表单处理方法
+    public function addhanddle(){
+	    $post = request()->post();
+	    $cate_add = db('cate')->insert($post);
+	    if($cate_add){
+	        $this->success('分类添加成功','cate/catelist');
+        }else{
+	        $this->error('商品分类添加失败','cate/catelist');
+        }
+	    //dump($post);
+    }
 }
 ?>
