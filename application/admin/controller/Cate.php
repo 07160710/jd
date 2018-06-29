@@ -9,7 +9,9 @@ class Cate extends \think\Controller
 	//商品列表方法
 	public function catelist()
 	{
-		$cate_list = db('cate')->select();
+		$cate_select = db('cate')->select();
+		$cate_model = model('cate');
+		$cate_list = $cate_model->getChildrenId($cate_select);
 		$this->assign('cate_list',$cate_list);
 		return view();
 	}
