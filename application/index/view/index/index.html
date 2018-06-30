@@ -6,13 +6,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>首页</title>
-
+		<link href="__INDEX__/css/hmstyle.css" rel="stylesheet" type="text/css" />
 		<link href="__INDEX__/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="__INDEX__/assets/css/admin.css" rel="stylesheet" type="text/css" />
 
 		<link href="__INDEX__/basic/css/demo.css" rel="stylesheet" type="text/css" />
 
-		<link href="__INDEX__/css/hmstyle.css" rel="stylesheet" type="text/css" />
+
 		<script src="__INDEX__/assets/js/jquery.min.js"></script>
 		<script src="__INDEX__/assets/js/amazeui.min.js"></script>
 
@@ -72,10 +72,10 @@
 																<div class="sort-side">
 																	<dl class="dl-sort">
 																		{volist name="vo1['children']" id="vo2"}
-																		<dt><span title="蛋糕">{$vo2.cate_name}</span></dt>
+																		<dt style="margin-top: 15px;">{$vo2.cate_name}</dt>
 																		{volist name="vo2['children']" id="vo3"}
 																		<dd><a title="{$vo3.cate_name}" href="#"><span>{$vo3.cate_name}</span></a></dd>
-																		{/volist}
+																		{/volist}<br>
 																		{/volist}
 																	</dl>
 																</div>
