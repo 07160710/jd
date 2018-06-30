@@ -3,14 +3,16 @@ namespace app\index\controller;
 /**
 * 商城首页控制器
 */
-class Index
+class Index extends \think\Controller
 {
+    //商品主页显示
     public function index()
     {
         $cate_select = db('cate')->select();
         $cate_model = model('cate');
         $cate_list = $cate_model->getChildren($cate_select);
-        dump($cate_list);die;
+        //dump($cate_list);
+        $this->assign('cate_list',$cate_list);
         return view();
     }
 }
