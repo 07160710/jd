@@ -59,7 +59,7 @@ class Cate extends \think\Controller
 	        $this->redirect('cate/cate/catelist');
         }
         $cate_select = db('cate')->select();
-        $cate_model = model('cate');
+        $cate_model = model('Cate');
         $cate_list = $cate_model->getChildrenId($cate_select);
         //获取无限极分类列表
 
@@ -77,6 +77,28 @@ class Cate extends \think\Controller
         }else{
 	        $this->error('分类信息修改失败','cate/catelist');
         }
+    }
+
+    //分类删除功能方法
+    public function del($cate_id=''){
+        if($cate_id == ''){
+            $this->redirect('cate/catelist');
+        }
+        $cate_find = db('cate')->find($cate_id);
+        if($cate_find == ''){
+            $this->redirect('cate/cate/catelist');
+        }
+
+        $cate_select = db('cate')->select();
+        $cate_model = model('Cate');
+        //得到全部子类
+        $cate_list = $cate_model->getChildrenId($cate_select,$cate_id);
+        $cate_list[] = $cate_find;
+        foreach ($cate_list as $key => $value){
+            db('cate')->where('cate_id',$value['cate_id'])->delete();
+        }
+        $this->redirect('cate/catelist');
+        //dump($cate_list);
     }
 }
 ?>
