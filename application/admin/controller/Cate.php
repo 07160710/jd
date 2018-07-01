@@ -9,14 +9,14 @@ class Cate extends \think\Controller
 	//商品列表方法
 	public function catelist()
 	{
-		$cate_select = db('cate')->select();
+		$cate_select = db('cate')->order('cate_sort')->select();
 		$cate_model = model('cate');
 		$cate_list = $cate_model->getChildrenId($cate_select);
 
 		//得到数据总数
 		$cate_totle = count($cate_list);
 
-		$page_class = new \app\admin\controller\Page($cate_totle,6);
+		$page_class = new \app\admin\controller\Page($cate_totle,100);
 		$show = $page_class->fpage();        //模板显示的内容
 		$limit = $page_class->setlimit();    //获取limit信息  ‘3,2’
 		$limit = explode(',',$limit);     //['3','2']
@@ -99,6 +99,19 @@ class Cate extends \think\Controller
         }
         $this->redirect('cate/catelist');
         //dump($cate_list);
+    }
+
+    //对分类排序
+    public function sort(){
+	    //dump(request()->post());
+        $post = request()->post();
+        foreach ($post as $key => $value){
+            db('cate')->update([
+                'cate_id' => $key,
+                'cate_sort' => $value,
+            ]);
+        }
+        $this->redirect('cate/catelist');
     }
 }
 ?>
