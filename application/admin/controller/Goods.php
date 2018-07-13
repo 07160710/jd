@@ -14,13 +14,17 @@ class Goods extends Controller
 {
     public function add()
     {
-        //当上传后跑到别的页面时会删除刚才在该页面上传的图片
+        // 当上传后跑到别的页面时会删除刚才在该页面上传的图片
         if(session('goods_thumb'))
         {
             $url_pre = DS.'jd'.DS.'public';
-            //DS系统分隔符
+            // DS系统分隔符
             $url = str_replace($url_pre,'.',session('goods_thumb'));
-            unlink($url);
+            // 如果存在文件就删除
+            if(file_exists($url))
+            {
+                unlink($url);
+            }
         }
         session('goods_thumb',null);
         $cate_select = db('cate')->select();
