@@ -22,4 +22,15 @@ class Goods extends Controller
         $this->assign('cate_list',$cate_list);
         return $this->fetch();
     }
+
+    public function uploadthumb(){
+        $file = request()->file('goods_thumb');
+        $info = $file ->move(ROOT_PATH.'public'.DS.'uploads');
+        if($info){
+            $address = DS.'jd'.DS.'public'.DS.'uploads'.DS.$info->getSaveName();
+            return $address;
+        }else{
+            echo $file->getError();
+        }
+    }
 }
