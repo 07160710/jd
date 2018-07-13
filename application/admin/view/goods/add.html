@@ -154,11 +154,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="cate_pid"> 所属商品 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属商品 </label>
 
                                 <div class="col-sm-4">
                                     <!--添加进去数据库的是cate_pid，传的值确是cate_id-->
-                                    <select class="form-control" id="cate_pid" name="cate_pid">
+                                    <select class="form-control" id="goods_pid" name="goods_pid">
                                             <option value="0">顶级商品</option>
                                             {volist name="cate_list" id="vo"}
                                             <option value="{$vo.cate_id}">{$vo.str}{$vo.cate_name}</option>
