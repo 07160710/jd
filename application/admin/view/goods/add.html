@@ -176,11 +176,11 @@
                                                     </a>
                                                     <ul class="submenu" style="display: none;">
                                                         <div class="col-xs-6">
-                                                        <select class="form-control" id="goods_pid" name="goods_pid">
+                                                        <!--<select class="form-control" id="goods_pid" name="goods_pid">-->
                                                             {volist name="$vo2['children']" id="vo3"}
-                                                            <option value="{$vo3.cate_id}">{$vo3.cate_name}</option>
+                                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="goods_pid" value="{$vo3.cate_id}" type="radio">{$vo3.cate_name}</input></li>
                                                             {/volist}
-                                                        </select>
+                                                        <!--</select>-->
                                                         </div>
                                                     </ul>
                                                 </li>
