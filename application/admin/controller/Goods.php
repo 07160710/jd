@@ -32,6 +32,10 @@ class Goods extends Controller
         $cate_list = $cate_model->getChildrenId($cate_select);
         //获取无限极分类列表
         $this->assign('cate_list',$cate_list);
+
+        $cate_list1 = $cate_model->getChildren($cate_select);
+        //获取无限极分类列表
+        $this->assign('cate_list1',$cate_list1);
         return $this->fetch();
     }
 

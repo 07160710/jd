@@ -122,10 +122,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="goods_price"> 商品金额 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="goods_price"> 商品价格 </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" name="goods_price" id="goods_price" class="col-xs-10 col-sm-5" placeholder="请输入商品金额">
+                                    <input type="text" name="goods_price" id="goods_price" class="col-xs-10 col-sm-5" placeholder="请输入商品价格">
                                 </div>
                             </div>
 
@@ -133,7 +133,8 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="goods_status"> 商品状态 </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" name="goods_status" id="goods_status" class="col-xs-10 col-sm-5" placeholder="请输入商品金额">
+                                   <input name="goods_status" id="goods_status" class="ace ace-switch ace-switch-7" type="checkbox" value="1" checked="checked">
+                                    <span class="lbl"></span>
                                 </div>
                             </div>
 
@@ -155,15 +156,40 @@
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属商品 </label>
+                                <div class="col-xs-4">
+                                    {volist name="cate_list1" id="vo1"}
+                                    <ul class="nav nav-list">
+                                        <li class="active">
+                                            <a href="#" class="dropdown-toggle">
+                                                <!--<i class="icon-desktop"></i>-->
+                                                <span class="menu-text"> {$vo1.cate_name} </span>
+                                                <b class="arrow icon-angle-down"></b>
+                                            </a>
 
-                                <div class="col-sm-4">
-                                    <!--添加进去数据库的是cate_pid，传的值确是cate_id-->
-                                    <select class="form-control" id="goods_pid" name="goods_pid">
-                                            <option value="0">顶级商品</option>
-                                            {volist name="cate_list" id="vo"}
-                                            <option value="{$vo.cate_id}">{$vo.str}{$vo.cate_name}</option>
-                                            {/volist}
-                                    </select>
+                                            <ul class="submenu" style="display: none;">
+                                                {volist name="$vo1['children']" id="vo2"}
+                                                <li>
+                                                    <a href="#" class="dropdown-toggle">
+                                                    <i class="icon-double-angle-right"></i>
+                                                        {$vo2.cate_name}
+                                                    <b class="arrow icon-angle-down"></b>
+                                                    </a>
+                                                    <ul class="submenu" style="display: none;">
+                                                        <div class="col-xs-6">
+                                                        <select class="form-control" id="goods_pid" name="goods_pid">
+                                                            {volist name="$vo2['children']" id="vo3"}
+                                                            <option value="{$vo3.cate_id}">{$vo3.cate_name}</option>
+                                                            {/volist}
+                                                        </select>
+                                                        </div>
+                                                    </ul>
+                                                </li>
+                                                {/volist}
+                                            </ul>
+
+                                        </li>
+                                    </ul>
+                                    {/volist}
                                 </div>
                             </div>
 

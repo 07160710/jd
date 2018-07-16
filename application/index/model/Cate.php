@@ -10,6 +10,7 @@ namespace app\index\model;
 
 class Cate extends \think\Model
 {
+    //得到全部子集，多维数组
     public function getChildren($cate_list,$pid=0){
         $arr = array();
         foreach ($cate_list as $key=>$value){
