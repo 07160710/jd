@@ -51,7 +51,7 @@ class Goods extends Controller
     //提交商品信息处理
     public function addhanddle(){
         $data = request()->post();
-        $data['good_thumb'] = session('goods_thumb');
+        $data['goods_thumb'] = session('goods_thumb');
         dump($data);
     }
     public function canclethumb()
