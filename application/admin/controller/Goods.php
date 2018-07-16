@@ -37,7 +37,6 @@ class Goods extends Controller
 
     //利用插件上传图片的方法
     public function uploadthumb(){
-
         $file = request()->file('goods_thumb');
         $info = $file ->move(ROOT_PATH.'public'.DS.'uploads');
         if($info){
@@ -55,4 +54,23 @@ class Goods extends Controller
         $data['good_thumb'] = session('goods_thumb');
         dump($data);
     }
+    public function canclethumb()
+    {
+        if(request()->isAjax()){
+            if(session('goods_thumb'))
+            {
+                $url_pre = DS.'jd'.DS.'public';
+                // DS系统分隔符
+                $url = str_replace($url_pre,'.',session('goods_thumb'));
+                // 如果存在文件就删除
+                if(file_exists($url))
+                {
+                    unlink($url);
+                }
+            }
+            session('goods_thumb',null);
+        }
+//        return 111;   对应ajax的data
+    }
+
 }

@@ -249,6 +249,7 @@
 <script src="__ADMIN__/jfu/js/jquery.iframe-transport.js"></script>
 
 <script type="text/javascript">
+    //添加图片
     $(function() {
         $("#goods_thumb").fileupload({
             url: '{:url("admin/goods/uploadthumb")}',
@@ -266,6 +267,7 @@
     });
 </script>
 <script type="text/javascript">
+    //删除图片
     $(function(){
         $('#thumb_cancle').click(function(){
             $.ajax({
